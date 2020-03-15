@@ -14,6 +14,13 @@ public class Item extends Products {
     }
 
     public String infoToString(Item item){
-            return "ID:" + item.getId()+"\n"+ "NAME:" + item.getName()+"\n"+ "DESCRIPTION:" + item.getDescription()+"\n"+ "PRICE:" + item.getAmount()+"\n"+ "DATE_IN:" + item.getDate_in()+"\n"+ "DATE_OUT:" + item.getDate_out()+"\n"+ "QUANTITY_IN:" + item.getQuantity_in()+"\n"+ "QUANTITY_OUT:" + item.getQuantity_out();
+            return "ID:" + item.getId()+"\n"+
+             "NAME:" + item.getName()+"\n"+ 
+             "DESCRIPTION:" + item.getDescription()+"\n"+ 
+             "PRICE:$" + item.getAmount()+"\n"+
+             "DATE_IN:" + item.getDate_in()+"\n"+ 
+             "DATE_OUT:" + item.getDate_out()+"\n"+ 
+             "QUANTITY_IN:" + item.getQuantity_in()+"\n"+ 
+             "QUANTITY_OUT:" + item.getQuantity_out();
     }
 }

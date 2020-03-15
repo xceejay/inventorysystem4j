@@ -82,7 +82,7 @@ public class InventorySystem {
 
             case 10:
 
-                main(args);
+                System.exit(1);
                 break;
 
             default:
@@ -129,7 +129,7 @@ public class InventorySystem {
         if (itemAdder.addItem(item)) {
             System.out.println("SUCESSFULLY ADDED+! Add Another Item Again By Pressing \"0\" and <Enter>");
             System.out.println("Or Pressing Any Key To Continue To Menu:");
-            if (new Scanner(System.in).nextInt() == 0) {
+            if (new Scanner(System.in).next().equals("0") ){
                 addItem();
             }
         }
@@ -167,7 +167,7 @@ public class InventorySystem {
                 System.out.println("Still want to remove an Item? You Could Try Again By Pressing \"0\" and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
 
-                if (new Scanner(System.in).nextInt() == 0) {
+                if (new Scanner(System.in).next().equals("0")) {
                     removeItem();
 
                 }
