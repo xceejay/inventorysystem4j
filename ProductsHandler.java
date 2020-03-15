@@ -3,12 +3,12 @@ import java.sql.*;
 public class ProductsHandler extends Products implements ProductsInterface {
 
     @Override
-    public int addItem(Item item) {
+    public boolean addItem(Item item) {
 
-        // first check if item exits in table first $$todo
+        // firesultst check if item exits in table firesultst $$todo
 
         try {
-            DatabaseHandler myconnection = new DatabaseHandler();;
+            DatabaseHandler myconnection = new DatabaseHandler();
 
             Connection connection = myconnection.getMyDatabase();
 
@@ -23,13 +23,13 @@ public class ProductsHandler extends Products implements ProductsInterface {
         }
 
         // TODO Auto-generated method stub
-        return 0;
+        return true;
     }
 
     @Override
-    public int removeItem(String item) {
+    public boolean removeItem(Item item) {
         // TODO Auto-generated method stub
-        return 0;
+        return true;
     }
 
     @Override
@@ -66,6 +66,43 @@ public class ProductsHandler extends Products implements ProductsInterface {
     public String generateBill() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public Item searchDB(Item item) {
+
+        try {
+            DatabaseHandler myconnection = new DatabaseHandler();
+            Connection connection = myconnection.getMyDatabase();
+            String search = "SELECT * FROM products WHERE  id=" + item.getId();
+            PreparedStatement statement = connection.prepareStatement(search);
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                String id = results.getString("id");
+                String name = results.getString("name");
+                String description = results.getString("description");
+                double amount = Double.parseDouble(results.getString("amount"));
+                Date date_in = Date.valueOf(results.getString("date_in"));
+                Date date_out = Date.valueOf(results.getString("date_out"));
+                int quantity_in = (int) Double.parseDouble(results.getString("quantity_in"));
+                int quantity_out = (int) Double.parseDouble(results.getString("quantity_out"));
+                item.setName(name);
+                item.setDescription(description);
+                item.setAmount(amount);
+                item.setDate_in(date_in);
+                item.setDate_out(date_out);
+                item.setQuantity_in(quantity_in);
+                item.setQuantity_out(quantity_out);
+
+               
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return item;
     }
 
 }
