@@ -4,7 +4,7 @@ public interface ProductsInterface {
     public abstract boolean addItem(Item item);
 
     // remove
-    public abstract boolean removeItem(Item item);
+    public abstract boolean removeItem(Item item, int quantity);
 
     // Modify
     public abstract boolean editName(String oldName);
@@ -22,5 +22,9 @@ public interface ProductsInterface {
     public abstract String generateBill(); // generate Bill to a file to be printed
 
     public abstract Item searchDB(Item item);
+
+    public abstract boolean increaseQuantity(Item item, int quantity) throws Exception;
+
+    public abstract boolean reduceQuantity(Item item, int quantity) throws Exception;
 
 }

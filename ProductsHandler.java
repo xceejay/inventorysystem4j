@@ -27,7 +27,13 @@ public class ProductsHandler extends Products implements ProductsInterface {
     }
 
     @Override
-    public boolean removeItem(Item item) {
+    public boolean removeItem(Item item, int quantity) {
+        try {
+            reduceQuantity(item, quantity);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         // TODO Auto-generated method stub
         return true;
     }
@@ -94,8 +100,6 @@ public class ProductsHandler extends Products implements ProductsInterface {
                 item.setQuantity_in(quantity_in);
                 item.setQuantity_out(quantity_out);
 
-               
-
             }
 
         } catch (Exception e) {
@@ -103,6 +107,49 @@ public class ProductsHandler extends Products implements ProductsInterface {
         }
 
         return item;
+    }
+
+    @Override
+    public boolean increaseQuantity(Item item, int quantity) throws Exception {
+
+        DatabaseHandler myconnection = new DatabaseHandler();
+        Connection connection = myconnection.getMyDatabase();
+        if (quantity > item.getQuantity_in()) {
+            // UPDATE products SET quantity_in=quantity_in + 1 WHERE id =1
+
+            return false;
+        } else
+
+            item.setQuantity_out(item.getQuantity_out() + quantity);
+
+        String update = "UPDATE products SET quantity_out= " + item.getQuantity_out() + "  WHERE id =" + item.getId();
+        PreparedStatement statement = connection.prepareStatement(update);
+        ResultSet results = statement.executeQuery();
+
+        return true;
+    }
+
+    @Override
+    public boolean reduceQuantity(Item item, int quantity) throws Exception {
+        DatabaseHandler myconnection = new DatabaseHandler();
+        Connection connection = myconnection.getMyDatabase();
+        if (quantity > item.getQuantity_in()) {
+            // UPDATE products SET quantity_in=quantity_in + 1 WHERE id =1
+
+            return false;
+        } else
+
+            item.setQuantity_in(item.getQuantity_in() - quantity);
+
+        String update = "UPDATE products SET quantity_in= " + item.getQuantity_in() + "  WHERE id =" + item.getId();
+        PreparedStatement statement = connection.prepareStatement(update);
+        ResultSet results = statement.executeQuery();
+
+        item.setQuantity_out(item.getQuantity_out() + quantity);
+        update = "UPDATE products SET quantity_out= " + item.getQuantity_out() + "  WHERE id " + item.getId();
+        statement = connection.prepareStatement(update);
+        results = statement.executeQuery();
+        return true;
     }
 
 }

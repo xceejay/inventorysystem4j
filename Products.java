@@ -3,17 +3,19 @@ import java.time.LocalDate;
 
 public class Products {
 
-    private int id=0;
+    private int id = 0;
     private int quantity_out = 0;
     private int quantity_in = 1;
     private String name = null;
     private String description = null;
     private double amount = 0;
     private LocalDate date;
-    private Date date_in = java.sql.Date.valueOf(date.now());
-    private Date date_out = java.sql.Date.valueOf(date.now().plusYears(2));
-    
+    private Date date_in = null;
+    private Date date_out = null;
+
     public Products() {
+        date_in = java.sql.Date.valueOf(date.now());
+        date_out = java.sql.Date.valueOf(date.now().plusYears(5));
 
     }
 
@@ -30,6 +32,7 @@ public class Products {
 
     }
 
+ 
     /**
      * @param id the id to set
      */

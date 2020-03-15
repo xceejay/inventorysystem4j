@@ -121,7 +121,7 @@ public class InventorySystem {
         item.setName(new Scanner(System.in).nextLine());
         System.out.print("Enter Price of Item:$");
         item.setAmount(new Scanner(System.in).nextDouble());
-        System.out.print("Enter  Description of Item");
+        System.out.print("Enter  Description of Item:");
         item.setDescription(new Scanner(System.in).nextLine());
         System.out.print("Enter How Many of This Item is being added:");
         item.setQuantity_in(new Scanner(System.in).nextInt());
@@ -129,7 +129,7 @@ public class InventorySystem {
         if (itemAdder.addItem(item)) {
             System.out.println("SUCESSFULLY ADDED+! Add Another Item Again By Pressing \"0\" and <Enter>");
             System.out.println("Or Pressing Any Key To Continue To Menu:");
-            if (new Scanner(System.in).next().equals("0") ){
+            if (new Scanner(System.in).next().equals("0")) {
                 addItem();
             }
         }
@@ -160,9 +160,10 @@ public class InventorySystem {
         } else {
             System.out.println(item.infoToString(item));
             System.out.print("Are You Sure You Want To Remove This Item? (yes/no)");
-            if (new Scanner(System.in).next().contains("yes")) {
-
-                itemRemover.removeItem(item);
+            if (new Scanner(System.in).next().contains("y")) {
+                System.out.print("How many?");
+                int quantity = new Scanner(System.in).nextInt();
+                itemRemover.removeItem(item, quantity);
             } else {
                 System.out.println("Still want to remove an Item? You Could Try Again By Pressing \"0\" and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
