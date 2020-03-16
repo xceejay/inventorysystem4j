@@ -28,14 +28,25 @@ public class ProductsHandler extends Products implements ProductsInterface {
 
     @Override
     public boolean removeItem(Item item, int quantity) {
+        boolean sucessful = false;
         try {
-            reduceQuantity(item, quantity);
+            if (reduceQuantity(item, quantity)) {
+                sucessful = true;
+
+            }
+            else{
+                sucessful=false ;
+            }
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         // TODO Auto-generated method stub
+
+        if(sucessful)
         return true;
+        else
+        return false;
     }
 
     @Override
@@ -146,7 +157,7 @@ public class ProductsHandler extends Products implements ProductsInterface {
         ResultSet results = statement.executeQuery();
 
         item.setQuantity_out(item.getQuantity_out() + quantity);
-        update = "UPDATE products SET quantity_out= " + item.getQuantity_out() + "  WHERE id " + item.getId();
+        update = "UPDATE products SET quantity_out= " + item.getQuantity_out() + "  WHERE id =" + item.getId();
         statement = connection.prepareStatement(update);
         results = statement.executeQuery();
         return true;

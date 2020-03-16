@@ -1,7 +1,8 @@
-import java.io.BufferedReader;
+
+// import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.*;
+// import java.io.InputStreamReader;
+// import java.sql.*;
 import java.util.*;
 
 public class InventorySystem {
@@ -41,7 +42,7 @@ public class InventorySystem {
 
             case 2:
                 removeItem(); // remove items from database
-                clear();
+
                 main(args);
                 break;
 
@@ -113,7 +114,7 @@ public class InventorySystem {
 
     // }
 
-    public static void addItem() {
+    public static boolean addItem() {
         Item item = new Item();
         ProductsHandler itemAdder = new ProductsHandler();
         System.out.print("Enter Name of Item:");
@@ -127,19 +128,20 @@ public class InventorySystem {
         item.setQuantity_in(new Scanner(System.in).nextInt());
 
         if (itemAdder.addItem(item)) {
-            System.out.println("SUCESSFULLY ADDED+! Add Another Item Again By Pressing \"0\" and <Enter>");
+            System.out.println("SUCESSFULLY ADDED+! Add Another Item Again By Pressing y and <Enter>");
             System.out.println("Or Pressing Any Key To Continue To Menu:");
-            if (new Scanner(System.in).next().equals("0")) {
+
+            if (new Scanner(System.in).next().equals("y")) {
                 addItem();
             }
         }
-
+        return true;
     }
 
-    public static void removeItem() {
+    public static boolean removeItem() {
         Item item = new Item();
         ProductsHandler itemRemover = new ProductsHandler();
-
+        boolean sucessful = false;
         System.out.print("Enter ID of Item:");
 
         item.setId(new Scanner(System.in).nextInt());
@@ -150,10 +152,10 @@ public class InventorySystem {
 
         if (item.getName() == null) {
 
-            System.out.println("No Such Item, You Could Try Again By Pressing \"0\" and <Enter>");
+            System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
             System.out.print("Or Pressing Any Key To Continue To Menu:");
 
-            if (new Scanner(System.in).nextInt() == 0) {
+            if (new Scanner(System.in).next().contains("y")) {
                 removeItem();
             }
 
@@ -163,18 +165,29 @@ public class InventorySystem {
             if (new Scanner(System.in).next().contains("y")) {
                 System.out.print("How many?");
                 int quantity = new Scanner(System.in).nextInt();
-                itemRemover.removeItem(item, quantity);
+                if (itemRemover.removeItem(item, quantity)) {
+                    System.out.println("Sucessfully Removed  " + quantity + " of Item " + item.getId()
+                            + "(ID) from the Inventory️🔔\n");
+                    sucessful = true;
+
+                    
+                } else {
+                    System.out.println("Failed To Remove Item: Quantity stated exceeds amout of Items️️🚫\n");
+                    sucessful = false;
+                }
             } else {
-                System.out.println("Still want to remove an Item? You Could Try Again By Pressing \"0\" and <Enter>");
+                System.out.println("Still want to remove an Item? You Could Do That By Pressing y and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
 
-                if (new Scanner(System.in).next().equals("0")) {
+                if (new Scanner(System.in).next().contains("y")) {
                     removeItem();
 
                 }
 
             }
+
         }
+        return sucessful;
 
     }
 

@@ -12,6 +12,7 @@ public class Products {
     private LocalDate date;
     private Date date_in = null;
     private Date date_out = null;
+    // add expiry date to field list and set it equal to the date out
 
     public Products() {
         date_in = java.sql.Date.valueOf(date.now());
