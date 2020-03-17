@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+compile(){
+javac InventorySystem.java
+}
+
+run(){
+./Greater.sh 
+java -cp :/usr/share/java/mariadb-java-client-2.5.4.jar InventorySystem|lolcat 
+
+./Bye.sh 
+}
+
+compile
+run 
+
