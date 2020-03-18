@@ -33,9 +33,8 @@ public class ProductsHandler extends Products implements ProductsInterface {
             if (reduceQuantity(item, quantity)) {
                 sucessful = true;
 
-            }
-            else{
-                sucessful=false ;
+            } else {
+                sucessful = false;
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -43,10 +42,10 @@ public class ProductsHandler extends Products implements ProductsInterface {
         }
         // TODO Auto-generated method stub
 
-        if(sucessful)
-        return true;
+        if (sucessful)
+            return true;
         else
-        return false;
+            return false;
     }
 
     @Override
@@ -90,12 +89,12 @@ public class ProductsHandler extends Products implements ProductsInterface {
         try {
             DatabaseHandler myconnection = new DatabaseHandler();
             Connection connection = myconnection.getMyDatabase();
-            String search = "SELECT * FROM products WHERE  id=" + item.getId();
+            String search = "SELECT * FROM products WHERE  id=" + item.getId() + " OR name=\"" + item.getName() + "\"";
             PreparedStatement statement = connection.prepareStatement(search);
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
-                String id = results.getString("id");
+                int id = (int) Double.parseDouble(results.getString("id"));
                 String name = results.getString("name");
                 String description = results.getString("description");
                 double amount = Double.parseDouble(results.getString("amount"));
@@ -103,6 +102,7 @@ public class ProductsHandler extends Products implements ProductsInterface {
                 Date date_out = Date.valueOf(results.getString("date_out"));
                 int quantity_in = (int) Double.parseDouble(results.getString("quantity_in"));
                 int quantity_out = (int) Double.parseDouble(results.getString("quantity_out"));
+                item.setId(id);
                 item.setName(name);
                 item.setDescription(description);
                 item.setAmount(amount);

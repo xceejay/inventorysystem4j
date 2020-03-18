@@ -72,7 +72,7 @@ public class InventorySystem {
                 break;
 
             case 8:
-
+                searchItem();
                 main(args);
                 break;
 
@@ -135,6 +135,7 @@ public class InventorySystem {
                 addItem();
             }
         }
+        clear();
         return true;
     }
 
@@ -170,7 +171,6 @@ public class InventorySystem {
                             + "(ID) from the Inventory️🔔\n");
                     sucessful = true;
 
-                    
                 } else {
                     System.out.println("Failed To Remove Item: Quantity stated exceeds amout of Items️️🚫\n");
                     sucessful = false;
@@ -187,8 +187,55 @@ public class InventorySystem {
             }
 
         }
+        clear();
         return sucessful;
 
+    }
+
+    public static void searchItem() {
+        ProductsHandler itemFinder = new ProductsHandler();
+        Item item = new Item();
+        clear();
+        System.out.println("\t\t ITEM REMOVAL");
+        System.out.println("\t\t ------------");
+
+
+        System.out.print("Search By Name Or ID?");
+
+        String searchBy = new Scanner(System.in).next();
+        // soon implement name search
+
+        if (searchBy.matches("[Nn][Aa][Mm][Ee]")) {
+            System.out.println("What Item Do You Want Information On?");
+            System.out.print("Type Name Here:");
+            item.setName(new Scanner(System.in).nextLine());
+            item = itemFinder.searchDB(item);
+
+            System.out.println(item.infoToString(item));
+        } else if (searchBy.matches("[Ii][Dd]")) {
+            System.out.println("What Item Do You Want Information On?");
+            System.out.print("Type ID Here:");
+            item.setId(new Scanner(System.in).nextInt());
+            item = itemFinder.searchDB(item);
+
+            System.out.println(item.infoToString(item));
+        } else {
+            System.out.println("Incorrect Input");
+            System.out.print("Press \"y\" To Search For Another Item Or Any Key To Continue To Menu:");
+            if (new Scanner(System.in).next().contains("y")) {
+                searchItem();
+
+            }
+
+        }
+
+        System.out.print("Press \"y\" To Search For Another Item Or Any Key To Continue To Menu:");
+            if (new Scanner(System.in).next().contains("y")) {
+                searchItem();
+
+            }
+
+clear();
     }
 
     public static void clear() {
