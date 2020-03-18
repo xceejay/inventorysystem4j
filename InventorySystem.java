@@ -62,7 +62,7 @@ public class InventorySystem {
                 break;
 
             case 6:
-
+                displayProductsID();
                 main(args);
                 break;
 
@@ -199,7 +199,6 @@ public class InventorySystem {
         System.out.println("\t\t ITEM REMOVAL");
         System.out.println("\t\t ------------");
 
-
         System.out.print("Search By Name Or ID?");
 
         String searchBy = new Scanner(System.in).next();
@@ -230,12 +229,34 @@ public class InventorySystem {
         }
 
         System.out.print("Press \"y\" To Search For Another Item Or Any Key To Continue To Menu:");
-            if (new Scanner(System.in).next().contains("y")) {
-                searchItem();
+        if (new Scanner(System.in).next().contains("y")) {
+            searchItem();
 
-            }
+        }
 
-clear();
+        clear();
+    }
+
+    public static void displayProductsID() {
+        clear();
+        ProductsHandler inventoryDisplayer = new ProductsHandler();
+        System.out.println("\t\t\t\t\t\t\t  -------------- ");
+        System.out.println("\t\t\t\t\t\t\t  PRODUCTS TABLE ");
+        System.out.println("\t\t\t\t\t\t\t  -------------- ");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %n", "ID", "NAME", "DESCRIPTION", "PRICE",
+                "DATE IN", "EXPIRY DATE", "QUANTITY IN", "QUANTITY OUT");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %n", "--", "----", "-----------", "-----",
+                "-------", "-----------", "-----------", "------------");
+
+        System.out.println(inventoryDisplayer.viewProductsID());
+
+        System.out.print("Press Any Key To Continue To Menu:");
+
+        if (!new Scanner(System.in).next().isEmpty()) {
+            removeItem();
+
+        }
+
     }
 
     public static void clear() {
