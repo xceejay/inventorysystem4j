@@ -29,6 +29,8 @@ public class ProductsHandler extends Products implements ProductsInterface {
 
     @Override
     public boolean removeItem(Item item, int quantity) {
+
+// instead of boolean change to into with 0,1,-1
         boolean sucessful = false;
         try {
             if (reduceQuantity(item, quantity)) {
