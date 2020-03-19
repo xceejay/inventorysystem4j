@@ -14,9 +14,13 @@ public interface ProductsInterface {
     public abstract boolean editAmount(String oldAmount);
 
     // Show
-    public abstract String viewProductsID(); // view Products in ascending order by ID
+    public abstract String viewProductsID(int order); // view Products in ascending order by ID
 
-    public abstract String viewProductsName(); // view Products in descending order by Name
+    public abstract String viewProductsName(int order); // view Products in descending order by Name
+    public abstract String viewProductsAmount(int order); // view Products in ascending order by ID
+
+    public abstract String viewProductsDate_in(int order);
+    public abstract String viewProductsExp_Date(int order);
     // functionalities
 
     public abstract String generateBill(); // generate Bill to a file to be printed
