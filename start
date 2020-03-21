@@ -2,12 +2,12 @@
 
 
 compile(){
-javac InventorySystem.java
+javac Main.java
 }
 
 run(){
 ./Greater.sh 
-java -cp :/usr/share/java/mariadb-java-client-2.5.4.jar InventorySystem|lolcat 
+java -cp :/usr/share/java/mariadb-java-client-2.5.4.jar Main|lolcat 
 
 ./Bye.sh 
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class InventorySystem {
-    public static void main(String[] args) throws IOException {
+    public static void Menu() throws IOException {
 
         // String command = "bash WelcomeScreen.sh"; %%% USED A BASH SCRIPT INSTEAD%%
         // try {
@@ -30,9 +30,10 @@ public class InventorySystem {
         System.out.println("8. Display & Sort Products By Price");
         System.out.println("9. Display & Sort Products By Date In");
         System.out.println("10. Display & Sort Products By Expiry Date");
-        System.out.println("11. Search For An Item");// newly added module---add to productinterface
-        System.out.println("12. Generate Bill");
-        System.out.println("13. Exit Program");
+        System.out.println("11. Display & Sort Products By Products Quantity");
+        System.out.println("12. Search For An Item");// newly added module---add to productinterface
+        System.out.println("13. Generate Bill");
+        System.out.println("14. Exit Program");
         System.out.print("Enter a choice:");
         choice = new Scanner(System.in).nextInt();
 
@@ -40,73 +41,78 @@ public class InventorySystem {
             case 1:
                 addItem(); // add items to database
                 clear();
-                main(args);
+                Menu();
                 break;
 
             case 2:
                 removeItem(); // remove items from database
 
-                main(args);
+                Menu();
                 break;
 
             case 3:
 
-                main(args);
+                Menu();
                 break;
 
             case 4:
 
-                main(args);
+                Menu();
                 break;
 
             case 5:
 
-                main(args);
+                Menu();
                 break;
 
             case 6:
                 displayProductsID();
-                main(args);
+                Menu();
                 break;
 
             case 7:
                 displayProductsName();
                 clear();
-                main(args);
+                Menu();
                 break;
 
             case 8:
                 displayProductsAmount();
                 clear();
-                main(args);
+                Menu();
                 break;
 
             case 9:
                 displayProductsDate_in();
                 clear();
-                main(args);
+                Menu();
                 break;
             case 10:
                 displayProductsExp_Date();
                 clear();
-                main(args);
+                Menu();
                 break;
             case 11:
-                searchItem();
-                main(args);
+                displayProductsQuantity_in();
+                clear();
+                Menu();
                 break;
             case 12:
-
-                main(args);
+                searchItem();
+                Menu();
                 break;
 
             case 13:
+
+                Menu();
+                break;
+            case 14:
 
                 System.exit(1);
                 break;
 
             default:
-                main(args);
+                Menu();
                 break;
 
         }
@@ -418,6 +424,40 @@ public class InventorySystem {
                 "-------", "-----------", "-----------", "------------");
 
         System.out.println(inventoryDisplayer.viewProductsAmount(input));
+
+        System.out.print("Press Any Key To Continue To Menu:");
+
+        new Scanner(System.in).next();
+    }
+
+    private static void displayProductsQuantity_in() {
+
+        clear();
+        ProductsHandler inventoryDisplayer = new ProductsHandler();
+
+        int input = -1;
+
+        do {
+
+            System.out.println("Press [1] To Sort By Quantity Left Ascending Order Or [0] To Sort In Desending Order");
+            System.out.print("Type Choice Here:");
+            input = new Scanner(System.in).nextInt();
+            if (input != 0 && input != 1) {
+                System.out.println("Input Should Be In The Range Of 0-1,Try Again");
+            } else
+                break;
+
+        } while (input != 0 && input != 1);
+
+        System.out.println("\t\t\t\t\t\t\t  -------------- ");
+        System.out.println("\t\t\t\t\t\t\t  PRODUCTS TABLE ");
+        System.out.println("\t\t\t\t\t\t\t  -------------- ");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %n", "ID", "NAME", "DESCRIPTION", "PRICE",
+                "DATE IN", "EXPIRY DATE", "QUANTITY IN", "QUANTITY OUT");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %n", "--", "----", "-----------", "-----",
+                "-------", "-----------", "-----------", "------------");
+
+        System.out.println(inventoryDisplayer.viewProductsQuantity_in(input));
 
         System.out.print("Press Any Key To Continue To Menu:");
 

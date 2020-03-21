@@ -337,6 +337,60 @@ public class ProductsHandler extends Products implements ProductsInterface {
         return Table;
     }
 
+
+    @Override
+    public String viewProductsQuantity_in(int order) {
+        String Table = "";
+        // TODO Auto-generated method stub
+
+        try {
+            DatabaseHandler myconnection = new DatabaseHandler();
+
+            Connection connection = myconnection.getMyDatabase();
+            PreparedStatement statement = connection.prepareStatement("select * from products order by quantity_in asc");
+            if (order == 1) {
+                statement = connection.prepareStatement("select * from products order by quantity_in asc");
+            } else if (order == 0) {
+                statement = connection.prepareStatement("select * from products order by quantity_in desc");
+
+            }
+            ResultSet results = statement.executeQuery();
+
+            int i = 0;
+
+            while (results.next()) {
+                ArrayList<Integer> id = new ArrayList<>();
+                ArrayList<String> name = new ArrayList<>();
+                ArrayList<String> description = new ArrayList<>();
+                ArrayList<Double> amount = new ArrayList<>();
+                ArrayList<Date> date_in = new ArrayList<>();
+                ArrayList<Date> date_out = new ArrayList<>();
+                ArrayList<Integer> quantity_in = new ArrayList<>();
+                ArrayList<Integer> quantity_out = new ArrayList<>();
+
+                id.add((int) Double.parseDouble(results.getString("id")));
+                name.add(results.getString("name"));
+                description.add(results.getString("description"));
+                amount.add(Double.parseDouble(results.getString("amount")));
+                date_in.add(Date.valueOf(results.getString("date_in")));
+                date_out.add(Date.valueOf(results.getString("date_out")));
+                quantity_in.add((int) Double.parseDouble(results.getString("quantity_in")));
+                quantity_out.add((int) Double.parseDouble(results.getString("quantity_out")));
+
+                Table += String.format("%-15s %-15s %-15s $%-14.2f %-15s %-15s %-15s %-15s %n", id.get(i), name.get(i),
+                        description.get(i), amount.get(i), date_in.get(i), date_out.get(i), quantity_in.get(i),
+                        quantity_out.get(i));
+
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return Table;
+    }
+
     @Override
     public String generateBill() {
         // TODO Auto-generated method stub
@@ -422,5 +476,7 @@ public class ProductsHandler extends Products implements ProductsInterface {
         results = statement.executeQuery();
         return true;
     }
+
+    
 
 }

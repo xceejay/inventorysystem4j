@@ -21,6 +21,7 @@ public interface ProductsInterface {
 
     public abstract String viewProductsDate_in(int order);
     public abstract String viewProductsExp_Date(int order);
+    public abstract String viewProductsQuantity_in(int order);
     // functionalities
 
     public abstract String generateBill(); // generate Bill to a file to be printed
