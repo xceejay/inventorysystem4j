@@ -1,9 +1,10 @@
+
 import java.sql.*;
 import java.time.LocalDate;
 
 public class Products {
 
-    private int id = 0;
+    private int id ;
     private int quantity_out = 0;
     private int quantity_in = 1;
     private String name = null;

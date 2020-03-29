@@ -1,7 +1,14 @@
-import java.sql.*;
+
+// package project;
+
 import java.util.ArrayList;
+import java.sql.*;
 
 public class ProductsHandler extends Products implements ProductsInterface {
+
+    public ProductsHandler(){
+        
+    }
 
     @Override
     public boolean addItem(Item item) {
@@ -30,7 +37,7 @@ public class ProductsHandler extends Products implements ProductsInterface {
     @Override
     public boolean removeItem(Item item, int quantity) {
 
-// instead of boolean change to into with 0,1,-1
+        // instead of boolean change to into with 0,1,-1
         boolean sucessful = false;
         try {
             if (reduceQuantity(item, quantity)) {
@@ -52,21 +59,78 @@ public class ProductsHandler extends Products implements ProductsInterface {
     }
 
     @Override
-    public boolean editName(String oldName) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean editName(Item item, String newName) {
+       
+      
+      try{
+      
+        // instead of boolean change to into with 0,1,-1
+      
+        DatabaseHandler myconnection = new DatabaseHandler();
+        Connection connection = myconnection.getMyDatabase();
+      
+        String update = "UPDATE products SET name='" +newName + "'  WHERE id =" + item.getId();
+        PreparedStatement statement = connection.prepareStatement(update);
+        ResultSet results = statement.executeQuery();
+
+      }catch(SQLException e){
+          e.printStackTrace();
+      }    
+        
+      if(searchDB(item).getName().equals(newName))
+      return true;
+      else 
+      return false;
+    
+    
+        
     }
 
     @Override
-    public boolean editDescription(String oldDescription) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean editDescription(Item item, String newDescription) {
+         
+        try{
+      
+            // instead of boolean change to into with 0,1,-1
+          
+            DatabaseHandler myconnection = new DatabaseHandler();
+            Connection connection = myconnection.getMyDatabase();
+          
+            String update = "UPDATE products SET description='" +newDescription + "'  WHERE id =" + item.getId();
+            PreparedStatement statement = connection.prepareStatement(update);
+            ResultSet results = statement.executeQuery();
+    
+          }catch(SQLException e){
+              e.printStackTrace();
+          }    
+            
+          if(searchDB(item).getDescription().equals(newDescription))
+          return true;
+          else 
+          return false;
     }
 
     @Override
-    public boolean editAmount(String oldAmount) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean editAmount(Item item, Double newAmount) {
+        try{
+      
+            // instead of boolean change to into with 0,1,-1
+          
+            DatabaseHandler myconnection = new DatabaseHandler();
+            Connection connection = myconnection.getMyDatabase();
+          
+            String update = "UPDATE products SET amount=" +newAmount + " WHERE id =" + item.getId();
+            PreparedStatement statement = connection.prepareStatement(update);
+            ResultSet results = statement.executeQuery();
+    
+          }catch(SQLException e){
+              e.printStackTrace();
+          }    
+            
+          if(searchDB(item).getAmount()==newAmount)
+          return true;
+          else 
+          return false;
     }
 
     @Override
@@ -337,7 +401,6 @@ public class ProductsHandler extends Products implements ProductsInterface {
         return Table;
     }
 
-
     @Override
     public String viewProductsQuantity_in(int order) {
         String Table = "";
@@ -347,7 +410,8 @@ public class ProductsHandler extends Products implements ProductsInterface {
             DatabaseHandler myconnection = new DatabaseHandler();
 
             Connection connection = myconnection.getMyDatabase();
-            PreparedStatement statement = connection.prepareStatement("select * from products order by quantity_in asc");
+            PreparedStatement statement = connection
+                    .prepareStatement("select * from products order by quantity_in asc");
             if (order == 1) {
                 statement = connection.prepareStatement("select * from products order by quantity_in asc");
             } else if (order == 0) {
@@ -476,7 +540,5 @@ public class ProductsHandler extends Products implements ProductsInterface {
         results = statement.executeQuery();
         return true;
     }
-
-    
 
 }

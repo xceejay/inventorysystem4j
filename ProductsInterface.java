@@ -7,11 +7,11 @@ public interface ProductsInterface {
     public abstract boolean removeItem(Item item, int quantity);
 
     // Modify
-    public abstract boolean editName(String oldName);
+    public abstract boolean editName(Item item,String newName);
 
-    public abstract boolean editDescription(String oldDescription);
+    public abstract boolean editDescription(Item item, String newDescription);
 
-    public abstract boolean editAmount(String oldAmount);
+    public abstract boolean editAmount(Item item,Double newAmount);
 
     // Show
     public abstract String viewProductsID(int order); // view Products in ascending order by ID
