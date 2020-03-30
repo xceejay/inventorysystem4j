@@ -598,7 +598,7 @@ public class InventorySystem {
         newitem.setId(new Scanner(System.in).nextInt());
         olditem.setId(newitem.getId());
         System.out.print("Enter New Description Of Item:");
-        newitem.setName(new Scanner(System.in).nextLine());
+        newitem.setDescription(new Scanner(System.in).nextLine());
 
         System.out.println("\t\tModified Item");
         System.out.println("\t\t-------------");
