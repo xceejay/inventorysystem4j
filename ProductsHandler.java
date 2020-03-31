@@ -6,8 +6,8 @@ import java.sql.*;
 
 public class ProductsHandler extends Products implements ProductsInterface {
 
-    public ProductsHandler(){
-        
+    public ProductsHandler() {
+
     }
 
     @Override
@@ -58,79 +58,97 @@ public class ProductsHandler extends Products implements ProductsInterface {
             return false;
     }
 
+    public boolean removeItemPermanently(Item item) {
+
+        try {
+
+            // instead of boolean change to into with 0,1,-1
+
+            DatabaseHandler myconnection = new DatabaseHandler();
+            Connection connection = myconnection.getMyDatabase();
+
+            String update = "DELETE from  products  WHERE id =" + item.getId();
+            PreparedStatement statement = connection.prepareStatement(update);
+            ResultSet results = statement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+
+    }
+
     @Override
     public boolean editName(Item item, String newName) {
-       
-      
-      try{
-      
-        // instead of boolean change to into with 0,1,-1
-      
-        DatabaseHandler myconnection = new DatabaseHandler();
-        Connection connection = myconnection.getMyDatabase();
-      
-        String update = "UPDATE products SET name='" +newName + "'  WHERE id =" + item.getId();
-        PreparedStatement statement = connection.prepareStatement(update);
-        ResultSet results = statement.executeQuery();
 
-      }catch(SQLException e){
-          e.printStackTrace();
-      }    
-        
-      if(searchDB(item).getName().equals(newName))
-      return true;
-      else 
-      return false;
-    
-    
-        
+        try {
+
+            // instead of boolean change to into with 0,1,-1
+
+            DatabaseHandler myconnection = new DatabaseHandler();
+            Connection connection = myconnection.getMyDatabase();
+
+            String update = "UPDATE products SET name='" + newName + "'  WHERE id =" + item.getId();
+            PreparedStatement statement = connection.prepareStatement(update);
+            ResultSet results = statement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (searchDB(item).getName().equals(newName))
+            return true;
+        else
+            return false;
+
     }
 
     @Override
     public boolean editDescription(Item item, String newDescription) {
-         
-        try{
-      
+
+        try {
+
             // instead of boolean change to into with 0,1,-1
-          
+
             DatabaseHandler myconnection = new DatabaseHandler();
             Connection connection = myconnection.getMyDatabase();
-          
-            String update = "UPDATE products SET description='" +newDescription + "'  WHERE id =" + item.getId();
+
+            String update = "UPDATE products SET description='" + newDescription + "'  WHERE id =" + item.getId();
             PreparedStatement statement = connection.prepareStatement(update);
             ResultSet results = statement.executeQuery();
-    
-          }catch(SQLException e){
-              e.printStackTrace();
-          }    
-            
-          if(searchDB(item).getDescription().equals(newDescription))
-          return true;
-          else 
-          return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (searchDB(item).getDescription().equals(newDescription))
+            return true;
+        else
+            return false;
     }
 
     @Override
     public boolean editAmount(Item item, Double newAmount) {
-        try{
-      
+        try {
+
             // instead of boolean change to into with 0,1,-1
-          
+
             DatabaseHandler myconnection = new DatabaseHandler();
             Connection connection = myconnection.getMyDatabase();
-          
-            String update = "UPDATE products SET amount=" +newAmount + " WHERE id =" + item.getId();
+
+            String update = "UPDATE products SET amount=" + newAmount + " WHERE id =" + item.getId();
             PreparedStatement statement = connection.prepareStatement(update);
             ResultSet results = statement.executeQuery();
-    
-          }catch(SQLException e){
-              e.printStackTrace();
-          }    
-            
-          if(searchDB(item).getAmount()==newAmount)
-          return true;
-          else 
-          return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (searchDB(item).getAmount() == newAmount)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -503,15 +521,10 @@ public class ProductsHandler extends Products implements ProductsInterface {
 
         DatabaseHandler myconnection = new DatabaseHandler();
         Connection connection = myconnection.getMyDatabase();
-        if (quantity > item.getQuantity_in()) {
-            // UPDATE products SET quantity_in=quantity_in + 1 WHERE id =1
+        item=new ProductsHandler().searchDB(item);
+        item.setQuantity_in(item.getQuantity_in() + quantity);
 
-            return false;
-        } else
-
-            item.setQuantity_out(item.getQuantity_out() + quantity);
-
-        String update = "UPDATE products SET quantity_out= " + item.getQuantity_out() + "  WHERE id =" + item.getId();
+        String update = "UPDATE products SET quantity_in= " + item.getQuantity_in() + "  WHERE id =" + item.getId();
         PreparedStatement statement = connection.prepareStatement(update);
         ResultSet results = statement.executeQuery();
 
