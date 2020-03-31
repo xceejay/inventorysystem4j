@@ -6,7 +6,7 @@ public class Main {
         try {
             new InventorySystem().clear();
             new InventorySystem().Menu();
-        } catch (IOException e) {
+        } catch (Exception e) {
             
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class InventorySystem {
 
-    public static void Menu() throws IOException {
+    public static void Menu() throws Exception {
 
         // String command = "bash WelcomeScreen.sh"; %%% USED A BASH SCRIPT INSTEAD%%
         // try {
@@ -330,6 +330,16 @@ public class InventorySystem {
         } else {
             System.out.println("Input Should Be In The Range Of [0-1],Try Again");
             removeItem();
+        }
+
+
+        System.out.println("Still want to remove an Item? You Could Do That By Pressing y and <Enter>");
+        System.out.print("Or Pressing Any Key To Continue To Menu:");
+
+        if (new Scanner(System.in).next().contains("y")) {
+
+            removeItem();
+
         }
         return sucessful;
 
