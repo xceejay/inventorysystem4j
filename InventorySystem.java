@@ -149,13 +149,12 @@ public class InventorySystem {
     public static boolean addItem() {
         Item item = new Item();
         ProductsHandler itemAdder = new ProductsHandler();
-        
 
         System.out.println("[0] Increase Quantity of Existing Item");
         System.out.println("[1] Add New Item To Database");
         System.out.print("Enter your choice:");
         int choice = new Scanner(System.in).nextInt();
-      
+
         if (choice == 1) {
 
             System.out.print("Enter Name of Item:");
@@ -187,7 +186,7 @@ public class InventorySystem {
         } else if (choice == 0) {
 
             System.out.print("Want To See Database For Item's ID Before You Proceed? (y/n)?");
-        
+
             if (new Scanner(System.in).next().equalsIgnoreCase("y")) {
                 displayProductsDefault();
             }
@@ -204,6 +203,12 @@ public class InventorySystem {
             int quantity = new Scanner(System.in).nextInt();
             try {
                 itemAdder.increaseQuantity(item, quantity);
+                System.out.println("SUCESSFULLY ADDED+! " + quantity + " to Item(ID)" + item.getId()
+                        + "Add Another Item Again By Pressing y and <Enter>");
+                System.out.print("Or Pressing Any Key To Continue To Menu:");
+                if (new Scanner(System.in).next().equalsIgnoreCase("y")) {
+                    addItem();
+                }
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -355,9 +360,8 @@ public class InventorySystem {
                 if (new Scanner(System.in).next().contains("y")) {
                     searchItem();
                 }
-            }
-            else
-            System.out.println(item.infoToString(item));
+            } else
+                System.out.println(item.infoToString(item));
         } else if (searchBy.matches("[Ii][Dd]")) {
             System.out.println("What Item Do You Want Information On?");
             System.out.print("Type ID Here:");
@@ -371,9 +375,8 @@ public class InventorySystem {
                 if (new Scanner(System.in).next().contains("y")) {
                     searchItem();
                 }
-            }
-            else
-            System.out.println(item.infoToString(item));
+            } else
+                System.out.println(item.infoToString(item));
         } else {
             System.out.println("Incorrect Input");
             System.out.print("Press \"y\" To Search For Another Item Or Any Key To Continue To Menu:");
