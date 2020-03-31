@@ -203,8 +203,8 @@ public class InventorySystem {
             int quantity = new Scanner(System.in).nextInt();
             try {
                 itemAdder.increaseQuantity(item, quantity);
-                System.out.println("SUCESSFULLY ADDED+! " + quantity + " to Item(ID)" + item.getId()
-                        + "Add Another Item Again By Pressing y and <Enter>");
+                System.out.println("SUCESSFULLY ADDED+! " + quantity + " to Item(ID) " + item.getId()
+                        + ". Add Another Item Again By Pressing y and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
                 if (new Scanner(System.in).next().equalsIgnoreCase("y")) {
                     addItem();
