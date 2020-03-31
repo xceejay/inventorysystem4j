@@ -193,7 +193,7 @@ public class InventorySystem {
             }
             System.out.print("Enter ID of Item:");
             item.setId(new Scanner(System.in).nextInt());
-            if (String.valueOf(item.getId()) == null) {
+            if (String.valueOf(item.getId()).equals("0")) {
                 System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
                 if (new Scanner(System.in).next().contains("y")) {
@@ -247,7 +247,7 @@ public class InventorySystem {
             System.out.println("\t\t ITEM REMOVAL");
             System.out.println("\t\t ------------");
 
-            if (String.valueOf(item.getId()) == null) {
+            if (String.valueOf(item.getId()).equals("0")) {
 
                 System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
@@ -293,7 +293,7 @@ public class InventorySystem {
             System.out.println("\t\t ITEM REMOVAL");
             System.out.println("\t\t ------------");
 
-            if (String.valueOf(item.getId()) == null) {
+            if (String.valueOf(item.getId()).equals("0")) {
 
                 System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
                 System.out.print("Or Pressing Any Key To Continue To Menu:");
@@ -347,14 +347,32 @@ public class InventorySystem {
             System.out.print("Type Name Here:");
             item.setName(new Scanner(System.in).nextLine());
             item = itemFinder.searchDB(item);
+            if (String.valueOf(item.getId()).equals("0")) {
 
+                System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
+                System.out.print("Or Pressing Any Key To Continue To Menu:");
+
+                if (new Scanner(System.in).next().contains("y")) {
+                    searchItem();
+                }
+            }
+            else
             System.out.println(item.infoToString(item));
         } else if (searchBy.matches("[Ii][Dd]")) {
             System.out.println("What Item Do You Want Information On?");
             System.out.print("Type ID Here:");
             item.setId(new Scanner(System.in).nextInt());
             item = itemFinder.searchDB(item);
+            if (String.valueOf(item.getId()).equals("0")) {
 
+                System.out.println("No Such Item, You Could Try Again By Pressing y and <Enter>");
+                System.out.print("Or Pressing Any Key To Continue To Menu:");
+
+                if (new Scanner(System.in).next().contains("y")) {
+                    searchItem();
+                }
+            }
+            else
             System.out.println(item.infoToString(item));
         } else {
             System.out.println("Incorrect Input");
