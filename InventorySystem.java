@@ -125,9 +125,13 @@ public class InventorySystem {
             }
         } catch (Exception e) {
             System.out.println();
-            System.out.println(e.toString());
-            System.out.print("Detected An Error , Press Any Key To Restart Program ");
+            System.out.println();
+            String Error =e.toString();
+            Error=Error.replaceAll("[a-z]*\\.[a-z]*\\.", "");
+            Error=Error.toUpperCase();
+            System.out.print("Detected An Error: "+Error+"...\nPress Any Key and <Enter> To Restart Program");
             new Scanner(System.in).nextLine();
+            clear();
             Menu();
         }
 
