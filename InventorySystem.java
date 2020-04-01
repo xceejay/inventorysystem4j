@@ -1,13 +1,13 @@
 
 // import java.io.BufferedReader;
-import java.io.IOException;
+import java.lang.Exception;
 // import java.io.InputStreamReader;
 // import java.sql.*;
 import java.util.*;
 
 public class InventorySystem {
 
-    public static void Menu() throws Exception {
+    public static void Menu() {
 
         // String command = "bash WelcomeScreen.sh"; %%% USED A BASH SCRIPT INSTEAD%%
         // try {
@@ -16,111 +16,119 @@ public class InventorySystem {
         // // TODO Auto-generated catch block
         // e.printStackTrace();
         // }
+        try {
+            int choice = 0;
+            System.out.println("\t\t MENU");
+            System.out.println("\t\t ----");
+            System.out.println(" 1. Add Products To Inventory");
+            System.out.println(" 2. Remove Products From Inventory");
+            System.out.println(" 3. Modify Name Of Product In Inventory");
+            System.out.println(" 4. Modify Price Of Product In Inventory");
+            System.out.println(" 5. Modify Description Of Product In Inventory");
+            System.out.println(" 6. Display & Sort Products By ID");
+            System.out.println(" 7. Display & Sort Products By Name");
+            System.out.println(" 8. Display & Sort Products By Price");
+            System.out.println(" 9. Display & Sort Products By Date In");
+            System.out.println("10. Display & Sort Products By Expiry Date");
+            System.out.println("11. Display & Sort Products By Products Quantity");
+            System.out.println("12. Search For An Item");// newly added module---add to productinterface
+            System.out.println("13. Generate Bill");
+            System.out.println("14. Exit Program");
+            System.out.print("Enter a choice:");
+            choice = new Scanner(System.in).nextInt();
+            clear();
 
-        int choice = 0;
-        System.out.println("\t\t MENU");
-        System.out.println("\t\t ----");
-        System.out.println(" 1. Add Products To Inventory");
-        System.out.println(" 2. Remove Products From Inventory");
-        System.out.println(" 3. Modify Name Of Product In Inventory");
-        System.out.println(" 4. Modify Price Of Product In Inventory");
-        System.out.println(" 5. Modify Description Of Product In Inventory");
-        System.out.println(" 6. Display & Sort Products By ID");
-        System.out.println(" 7. Display & Sort Products By Name");
-        System.out.println(" 8. Display & Sort Products By Price");
-        System.out.println(" 9. Display & Sort Products By Date In");
-        System.out.println("10. Display & Sort Products By Expiry Date");
-        System.out.println("11. Display & Sort Products By Products Quantity");
-        System.out.println("12. Search For An Item");// newly added module---add to productinterface
-        System.out.println("13. Generate Bill");
-        System.out.println("14. Exit Program");
-        System.out.print("Enter a choice:");
-        choice = new Scanner(System.in).nextInt();
-        clear();
-        switch (choice) {
-            case 1:
-                addItem(); // add items to database
-                clear();
-                Menu();
+            switch (choice) {
+                case 1:
+                    addItem(); // add items to database
+                    clear();
+                    Menu();
 
-                break;
+                    break;
 
-            case 2:
-                removeItem(); // remove items from database
-                clear();
-                Menu();
-                break;
+                case 2:
+                    removeItem(); // remove items from database
+                    clear();
+                    Menu();
+                    break;
 
-            case 3:
-                modifyItemName();
-                clear();
-                Menu();
-                break;
+                case 3:
+                    modifyItemName();
+                    clear();
+                    Menu();
+                    break;
 
-            case 4:
-                clear();
-                Menu();
-                break;
+                case 4:
+                    clear();
+                    Menu();
+                    break;
 
-            case 5:
-                modifyItemDescription();
-                clear();
-                Menu();
-                break;
+                case 5:
+                    modifyItemDescription();
+                    clear();
+                    Menu();
+                    break;
 
-            case 6:
-                displayProductsID();
-                clear();
-                Menu();
-                break;
+                case 6:
+                    displayProductsID();
+                    clear();
+                    Menu();
+                    break;
 
-            case 7:
-                displayProductsName();
-                clear();
-                Menu();
-                break;
+                case 7:
+                    displayProductsName();
+                    clear();
+                    Menu();
+                    break;
 
-            case 8:
-                displayProductsAmount();
-                clear();
-                Menu();
-                break;
+                case 8:
+                    displayProductsAmount();
+                    clear();
+                    Menu();
+                    break;
 
-            case 9:
-                displayProductsDate_in();
-                clear();
-                Menu();
-                break;
-            case 10:
-                displayProductsExp_Date();
-                clear();
-                Menu();
-                break;
-            case 11:
-                displayProductsQuantity_in();
-                clear();
-                Menu();
-                break;
-            case 12:
-                searchItem();
-                clear();
-                Menu();
-                break;
+                case 9:
+                    displayProductsDate_in();
+                    clear();
+                    Menu();
+                    break;
+                case 10:
+                    displayProductsExp_Date();
+                    clear();
+                    Menu();
+                    break;
+                case 11:
+                    displayProductsQuantity_in();
+                    clear();
+                    Menu();
+                    break;
+                case 12:
+                    searchItem();
+                    clear();
+                    Menu();
+                    break;
 
-            case 13:
+                case 13:
 
-                clear();
-                Menu();
-                break;
-            case 14:
+                    clear();
+                    Menu();
+                    break;
+                case 14:
 
-                System.exit(1);
-                break;
+                    System.exit(1);
+                    break;
 
-            default:
-                Menu();
-                break;
+                default:
+                    Menu();
+                    break;
 
+            }
+        } catch (Exception e) {
+            System.out.println();
+            System.out.println(e.toString());
+            System.out.print("Detected An Error , Press Any Key To Restart Program ");
+            new Scanner(System.in).nextLine();
+            Menu();
         }
 
     }
@@ -146,7 +154,7 @@ public class InventorySystem {
 
     // }
 
-    public static boolean addItem() {
+    public static boolean addItem() throws Exception {
         Item item = new Item();
         ProductsHandler itemAdder = new ProductsHandler();
 
@@ -229,7 +237,7 @@ public class InventorySystem {
         return true;
     }
 
-    public static boolean removeItem() {
+    public static boolean removeItem() throws Exception {
         Item item = new Item();
         ProductsHandler itemRemover = new ProductsHandler();
         boolean sucessful = false;
@@ -277,14 +285,6 @@ public class InventorySystem {
                         sucessful = false;
                     }
                 } else {
-                    System.out.println("Still want to remove an Item? You Could Do That By Pressing y and <Enter>");
-                    System.out.print("Or Pressing Any Key To Continue To Menu:");
-
-                    if (new Scanner(System.in).next().contains("y")) {
-
-                        removeItem();
-
-                    }
 
                 }
 
@@ -315,14 +315,6 @@ public class InventorySystem {
                         System.out.println("Sucessfully Removed  Item " + item.getId()
                                 + "(ID) permanently from the Inventory️🔔\n");
                         sucessful = true;
-                        System.out.println("Still want to remove an Item? You Could Do That By Pressing y and <Enter>");
-                        System.out.print("Or Pressing Any Key To Continue To Menu:");
-
-                        if (new Scanner(System.in).next().contains("y")) {
-
-                            removeItem();
-
-                        }
 
                     }
                 }
@@ -331,7 +323,6 @@ public class InventorySystem {
             System.out.println("Input Should Be In The Range Of [0-1],Try Again");
             removeItem();
         }
-
 
         System.out.println("Still want to remove an Item? You Could Do That By Pressing y and <Enter>");
         System.out.print("Or Pressing Any Key To Continue To Menu:");
@@ -345,7 +336,7 @@ public class InventorySystem {
 
     }
 
-    public static void searchItem() {
+    public static void searchItem() throws Exception {
         ProductsHandler itemFinder = new ProductsHandler();
         Item item = new Item();
 
@@ -405,7 +396,7 @@ public class InventorySystem {
 
     }
 
-    public static void displayProductsDefault() {
+    public static void displayProductsDefault() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
         // int input = -1;
@@ -437,7 +428,7 @@ public class InventorySystem {
 
     }
 
-    public static void displayProductsID() {
+    public static void displayProductsID() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
         int input = -1;
@@ -472,7 +463,7 @@ public class InventorySystem {
 
     }
 
-    public static void displayProductsName() {
+    public static void displayProductsName() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
 
@@ -505,7 +496,7 @@ public class InventorySystem {
         new Scanner(System.in).next();
     }
 
-    public static void displayProductsExp_Date() {
+    public static void displayProductsExp_Date() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
 
@@ -540,7 +531,7 @@ public class InventorySystem {
 
     }
 
-    public static void displayProductsDate_in() {
+    public static void displayProductsDate_in() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
 
@@ -571,7 +562,7 @@ public class InventorySystem {
         new Scanner(System.in).next();
     }
 
-    public static void displayProductsAmount() {
+    public static void displayProductsAmount() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
 
@@ -604,7 +595,7 @@ public class InventorySystem {
         new Scanner(System.in).next();
     }
 
-    private static void displayProductsQuantity_in() {
+    private static void displayProductsQuantity_in() throws Exception {
 
         ProductsHandler inventoryDisplayer = new ProductsHandler();
 
@@ -637,7 +628,7 @@ public class InventorySystem {
         new Scanner(System.in).next();
     }
 
-    public static void modifyItemName() {
+    public static void modifyItemName() throws Exception {
         Item olditem = new Item();
         Item newitem = new Item();
         ProductsHandler itemModifier = new ProductsHandler();
@@ -673,7 +664,7 @@ public class InventorySystem {
 
     }
 
-    public static void modifyItemPrice() {
+    public static void modifyItemPrice() throws Exception {
         Item olditem = new Item();
         Item newitem = new Item();
         ProductsHandler itemModifier = new ProductsHandler();
@@ -709,7 +700,7 @@ public class InventorySystem {
 
     }
 
-    public static void modifyItemDescription() {
+    public static void modifyItemDescription() throws Exception {
         Item olditem = new Item();
         Item newitem = new Item();
         ProductsHandler itemModifier = new ProductsHandler();
